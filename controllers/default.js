@@ -27,7 +27,7 @@ function socket() {
         client.tty.on('exit', function (code, signal) {
             client.tty = null;
             client.close();
-            console.log("Process killed");
+            console.log("Python session ended");
         });
 
         client.tty.on('data', function (data) {
@@ -40,7 +40,8 @@ function socket() {
         if (client.tty) {
             client.tty.kill(9);
             client.tty = null;
-            console.log("Process killed and terminal unloaded");
+            console.log("Terminal closed (Python session terminated)");
+
         }
     });
 
