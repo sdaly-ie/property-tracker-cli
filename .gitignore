@@ -1,14 +1,16 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
 
-node_modules/
-npm-debug.log*
-.DS_Store
-
+# Generated exports
 analysis_results.txt
-analysis_results*.txt
+analysis_*.csv
 
-creds.json
-*.creds.json
-*.secret.json
+# Backups / temp
+*.bak
+
+# Accidental / local artifacts
+node/
+property-tracker-cli-terminal@1.0.0/
+index.js.json
