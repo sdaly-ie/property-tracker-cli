@@ -14,3 +14,4 @@ analysis_*.csv
 node/
 property-tracker-cli-terminal@1.0.0/
 index.js.json
+node_modules/
