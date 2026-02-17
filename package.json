@@ -1,23 +1,23 @@
 {
-  "name": "terminal",
+  "name": "property-tracker-cli-terminal",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node -e \"console.log('ok')\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lechien73/terminal.git"
+    "url": "git+https://github.com/sdaly-ie/property-tracker-cli.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lechien73/terminal/issues"
+    "url": "https://github.com/sdaly-ie/property-tracker-cli/issues"
   },
-  "homepage": "https://github.com/lechien73/terminal#readme",
+  "homepage": "https://github.com/sdaly-ie/property-tracker-cli#readme",
   "dependencies": {
-    "node-static": "^0.7.11",
     "node-pty": "^0.10.1",
-    "total4": "^0.0.45"
+    "node-static": "^0.7.11",
+    "total4": "^0.0.99"
   }
 }

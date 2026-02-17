@@ -1,9 +1,17 @@
-core.Microsoft*
-core.mongo*
-core.python*
-env.py
+# Python
+.venv/
 __pycache__/
-*.py[cod]
+*.pyc
+
+# Generated exports
+analysis_results.txt
+analysis_*.csv
+
+# Backups / temp
+*.bak
+
+# Accidental / local artifacts
+node/
+property-tracker-cli-terminal@1.0.0/
+index.js.json
 node_modules/
-.github/
-creds.json
