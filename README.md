@@ -20,7 +20,7 @@ This repo also includes a small **Node.js** wrapper that runs the Python CLI ins
 - **Defensive programming**: validation, clear error messages, and “fail fast” configuration checks
 - **Export tooling**: write analysis results to **TXT** and **Comma-Separated Values (CSV)** files (local runs)
 - **Deployment-aware design**: browser terminal wrapper with fixed 80×24 output constraints
-- **Automation**: **Continuous Integration (CI)** smoke checks via GitHub Actions
+- **Automation**: **Continuous Integration (CI)** checks via GitHub Actions, including Python syntax checks and core `pytest` tests
 
 ---
 
@@ -54,7 +54,7 @@ If you choose “yes” when prompted, the app writes:
 
 ## Tech stack
 
-- **Python**: `gspread`, `google-auth`, `numpy`, `statistics`
+- **Python**: `gspread`, `google-auth`, `numpy`, `statistics`, `pytest`
 - **Node.js** (demo wrapper): `total4`, `node-pty`, `xterm.js` (via CDN)
 - **CI**: GitHub Actions (`.github/workflows/ci.yml`)
 
@@ -65,7 +65,8 @@ If you choose “yes” when prompted, the app writes:
 - `run.py` — main Python CLI program
 - `requirements.txt` — Python dependencies
 - `index.js`, `controllers/default.js`, `views/` — browser terminal wrapper
-- `.github/workflows/ci.yml` — CI smoke checks
+- `.github/workflows/ci.yml` — CI checks (syntax + core pytest tests)
+- `tests/test_run.py` — core pytest coverage for helper functions
 - `.devcontainer/` — optional devcontainer configuration
 
 ---
@@ -178,8 +179,9 @@ Why `PT_CREDS_PATH=creds.json`?
 
 ## CI (Continuous Integration)
 
-GitHub Actions runs smoke checks on push/pull request:
+GitHub Actions runs checks on push/pull request:
 - Python syntax compilation (`py_compile`, `compileall`)
+- Core `pytest` tests for helper functions
 - Node install + basic require check
 
 Workflow file: `.github/workflows/ci.yml`
@@ -196,7 +198,6 @@ Workflow file: `.github/workflows/ci.yml`
 
 ## Roadmap (next practical upgrades)
 
-- Add `pytest` unit tests for statistics + range selection
 - Add `ruff` or `flake8` linting in CI
 - Refactor `run.py` into modules (`src/`) for cleaner separation
 - Add a “sample dataset” mode (local CSV) for demoing without Google credentials
