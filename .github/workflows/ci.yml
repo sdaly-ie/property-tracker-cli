@@ -25,6 +25,8 @@ jobs:
         run: |
           python -m py_compile run.py
           python -m compileall -q .
+      - name: Run pytest core tests
+        run: python -m pytest -q
 
   node-smoke:
     runs-on: ubuntu-latest
