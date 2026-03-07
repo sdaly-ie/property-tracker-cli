@@ -33,17 +33,11 @@ import csv
 # Import gspread for Google Sheets access
 import gspread
 
-# Import Google credentials loader for service accounts
-from google.oauth2.service_account import Credentials
-
 # Import specific gspread exception so we can raise a clear message
 from gspread.exceptions import SpreadsheetNotFound
 
 
 # -------------------- Google Sheets connection --------------------
-
-# Sheets-only scope is enough when opening by Spreadsheet ID
-SCOPE = ["https://www.googleapis.com/auth/spreadsheets"]
 
 # Default location for creds file (recommended: outside repo)
 DEFAULT_CREDS_PATH = Path.home() / ".secrets" / "property-tracker-creds.json"
@@ -93,8 +87,7 @@ def connect_to_google_sheet():
     except Exception:
         service_account_email = None
 
-    creds = Credentials.from_service_account_file(str(creds_path)).with_scopes(SCOPE)
-    gspread_client = gspread.authorize(creds)
+    gspread_client = gspread.service_account(filename=str(creds_path))
 
     try:
         sheet = gspread_client.open_by_key(spreadsheet_id)
