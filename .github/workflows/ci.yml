@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  python-quality:
+  python-smoke:
     runs-on: ubuntu-latest
 
     steps:
