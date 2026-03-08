@@ -20,7 +20,7 @@ This repo also includes a small **Node.js** wrapper that runs the Python CLI ins
 - **Defensive programming**: validation, clear error messages, and “fail fast” configuration checks
 - **Export tooling**: write analysis results to **TXT** and **Comma-Separated Values (CSV)** files (local runs)
 - **Deployment-aware design**: browser terminal wrapper with fixed 80×24 output constraints
-- **Automation**: **Continuous Integration (CI)** checks via GitHub Actions, including Python syntax checks and core `pytest` tests
+- **Automation**: **Continuous Integration (CI)** checks via GitHub Actions, including Python syntax checks, `ruff` linting, core `pytest` tests, and a basic Node wrapper smoke check
 
 ---
 
@@ -56,18 +56,20 @@ If you choose “yes” when prompted, the app writes:
 
 - **Python**: `gspread`, `google-auth`, `numpy`, `statistics`, `pytest`
 - **Node.js** (demo wrapper): `total4`, `node-pty`, `xterm.js` (via CDN)
-- **CI**: GitHub Actions (`.github/workflows/ci.yml`)
+- **CI / quality**: GitHub Actions, `ruff`, `pytest`
 
 ---
 
 ## Repository structure
 
 - `run.py` — main Python CLI program
-- `requirements.txt` — Python dependencies
+- `requirements.txt` — Python runtime dependencies
+- `requirements-dev.txt` — Python development dependencies (`ruff` + runtime deps)
+- `pyproject.toml` — `ruff` configuration
 - `index.js`, `controllers/default.js`, `views/` — browser terminal wrapper
-- `.github/workflows/ci.yml` — CI checks (syntax + core pytest tests)
+- `.github/workflows/ci.yml` — CI checks (syntax, `ruff`, core `pytest`, Node smoke)
 - `tests/test_run.py` — core pytest coverage for helper functions
-- `.devcontainer/` — optional devcontainer configuration
+- `.devcontainer/` — optional devcontainer configuration (renamed from inherited template defaults)
 
 ---
 
@@ -87,10 +89,20 @@ The app uses `worksheet.get_all_records()` so header names must match exactly (i
 
 ### Step 1 — Create a virtual environment and install dependencies
 
+macOS / Linux:
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+Windows PowerShell:
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+py -m pip install -r requirements.txt
 ```
 
 ### Step 2 — Create Google credentials (service account)
@@ -164,7 +176,7 @@ This repo’s Node wrapper supports a typical “browser terminal” deployment 
 
 ### Required config vars
 
-- `PORT` = `8000`
+- `PORT` — set automatically by the hosting platform in deployment; use `8000` for local runs if needed
 - `PT_SPREADSHEET_ID` = your Google Sheet ID
 - `CREDS` = the **full contents** of your service-account JSON (paste as a single config var)
 - `PT_CREDS_PATH` = `creds.json`
@@ -181,10 +193,19 @@ Why `PT_CREDS_PATH=creds.json`?
 
 GitHub Actions runs checks on push/pull request:
 - Python syntax compilation (`py_compile`, `compileall`)
+- `ruff` linting
 - Core `pytest` tests for helper functions
 - Node install + basic require check
 
 Workflow file: `.github/workflows/ci.yml`
+
+---
+
+## Project status
+
+This project is currently maintained as a portfolio/demo repository.
+
+The current release focuses on a stable CLI workflow, core automated checks, and practical CI quality gates.
 
 ---
 
@@ -196,16 +217,7 @@ Workflow file: `.github/workflows/ci.yml`
 
 ---
 
-## Roadmap (next practical upgrades)
-
-- Add `ruff` or `flake8` linting in CI
-- Refactor `run.py` into modules (`src/`) for cleaner separation
-- Add a “sample dataset” mode (local CSV) for demoing without Google credentials
-- Add optional chart export (CSV → matplotlib) for richer reporting
-
----
-
 ## Data source
 
-- Central Statistics Office (Ireland) / data.gov.ie — “Price of new property by quarter”
+- Central Statistics Office (CSO) Ireland / data.gov.ie — “Price of New Property by Quarter”
 

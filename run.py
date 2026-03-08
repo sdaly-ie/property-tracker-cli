@@ -13,29 +13,27 @@
 # - Opening by Spreadsheet ID avoids needing Google Drive API enabled.
 
 # Import OS helpers for environment variables
-import os
+# Import CSV writer for exporting results
+import csv
 
 # Import JSON to read the service account email from the creds file (for helpful errors)
 import json
-
-# Import Path to build safe file paths
-from pathlib import Path
+import os
 
 # Import stats helpers
 import statistics
 
-# Import NumPy for percentiles (quartiles / IQR)
-import numpy as np
-
-# Import CSV writer for exporting results
-import csv
+# Import Path to build safe file paths
+from pathlib import Path
 
 # Import gspread for Google Sheets access
 import gspread
 
+# Import NumPy for percentiles (quartiles / IQR)
+import numpy as np
+
 # Import specific gspread exception so we can raise a clear message
 from gspread.exceptions import SpreadsheetNotFound
-
 
 # -------------------- Google Sheets connection --------------------
 
