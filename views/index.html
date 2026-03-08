@@ -1,5 +1,5 @@
 <body>
-    <button onclick="window.location.reload()">Run Program</button>
+    <button onclick="window.location.reload()">Start Property Tracker CLI</button>
     <div id="terminal"></div>
 
     <script>
@@ -8,7 +8,7 @@
             rows: 24
         });
         term.open(document.getElementById('terminal'));
-        term.writeln('Running startup command: python3 run.py');
+	term.writeln('Starting Property Tracker CLI: python3 run.py');
         term.writeln('');
 
         var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
