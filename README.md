@@ -1,6 +1,6 @@
 # Property Tracker CLI (Ireland)
 
-**Live demo (desktop/laptop recommended):** https://project-3-analysis-ad08a5721e8e.herokuapp.com/
+**Live demo (desktop/laptop recommended):** https://property.stephendaly.dev
 
 > This demo runs the CLI in a browser-based terminal with a fixed **80×24** layout.
 > On **mobile**, the terminal width is very constrained, so the experience can feel cramped and may require zoom/scroll.
